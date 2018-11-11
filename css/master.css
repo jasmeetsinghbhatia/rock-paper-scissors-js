@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Asap:400,500,700');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #292C34;
+}
+
+header {
+    background: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.score-board {
+    margin: 20px auto;
+    padding: 15px 20px;
+    border: 3px solid white;
+    border-radius: 4px;
+    width: 250px;
+    color: white;
+    font-size: 46px;
+    text-align: center;
+    font-family: Asap, sans-serif;
+    position: relative;
+    background-color: #F6BD4A;
+}
+
+.score {
+    color: #292C33;
+    text-align: center;
+    margin: 30px;
+}
+
+.badge {
+    padding: 2px 10px;
+    background: #E2584D;
+    color: white;
+    font-size: 35px;
+    font-family: Asap, sans-serif;
+}
+
+#user-label {
+    position: absolute;
+    top: 30%;
+    left: -20%;
+}
+
+#bot-label {
+    position: absolute;
+    top: 30%;
+    right: -20%;
+}
+
+.result > p {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+.action {
+    margin: 10px auto;
+    border: 3px solid white;
+    border-radius: 4px;
+    width: 200px;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    font-family: Asap, sans-serif;
+    position: relative;
+    transition: all 0.3s ease;
+    background-color: #63BDBA;
+}
+
+.action:hover {
+    cursor: pointer;
+    background-color: #E2584D;
+}
+
+.choices {
+    position: relative;
+    text-align: center;
+}
+
+.choice-you {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin: 10px -100px;
+    transition: all 0.3s ease;
+}
+
+.choice-you > img {
+    height: 50%;
+    width: 50%;
+    margin-right: 10px;
+}
+
+.choice-you:hover {
+    cursor: pointer;
+}
+
+.choice-bot {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin: 10px -100px;
+    /*z-index: 1;*/
+}
+
+.choice-bot > img {
+    height: 50%;
+    width: 50%;
+}
+
+header > .author {
+    position: sticky;
+    padding: 0px;
+    text-align: center;
+    background: white;
+    width: auto;
+    height: auto;
+    font-family: Asap, sans-serif;
+    font-weight: bold;
+}
