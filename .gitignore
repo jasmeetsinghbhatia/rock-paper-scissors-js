@@ -1,2 +1,5 @@
 .idea/vcs.xml
-.idea/workspace.xml
+*.idea*
+
+.DS_Store
+css/.DS_Store

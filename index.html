@@ -23,7 +23,15 @@
     <p>Paper covers Rock. You win!</p>
 </div>
 
-<div onclick="start_game();" class="action">Start</div>
+
+<div class="onoffswitch" onclick="start_game();" aria-label="Thank you!">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div>
+
 
 <div class="choices">
     <div class="choice-you" id="rock-you" style="display: none">
@@ -35,7 +43,7 @@
     <div class="choice-you" id="scissors-you" style="display: none">
         <img src="images/scissors-you.png" alt="Play Rock">
     </div>
-    <div class="choice-bot" id="rock-bot"  style="display: none">
+    <div class="choice-bot" id="rock-bot" style="display: none">
         <img src="images/rock-bot.png" alt="Play Rock">
     </div>
     <div class="choice-bot" id="paper-bot" style="display: none">
