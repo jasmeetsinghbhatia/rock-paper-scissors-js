@@ -71,7 +71,8 @@ function get_random_choice(choices) {
 }
 
 function get_bot_choice() {
-    let count = 0;
+    start_timer();
+    let count = 1;
     // Setting timer of 5 secs with intervals of 100ms
     let random_bot_move = setInterval(function () {
         hide_choice(active_bot_choice);
@@ -79,17 +80,28 @@ function get_bot_choice() {
         display_choice(active_bot_choice);
         console.log(count);
 
-        if (count === 50) {
-            evaluate_game();
+        if (count === 10) {
             clearInterval(random_bot_move);
+            evaluate_game();
         }
 
         count++;
-    }, 100);
+    }, 500);
 }
 
 function start_timer() {
 // start the visible timer and sync with get_bot_choice()
+    let count = 4;
+    result_div.textContent = `${count+1} seconds remaining`;
+
+    let timer = setInterval(function () {
+        result_div.textContent = `${count} seconds remaining`;
+        if (count === 1) {
+            clearInterval(timer);
+        }
+        count--;
+    }, 1000);
+
 }
 
 function reset_game_state() {
@@ -147,7 +159,6 @@ function update_result(winner) {
 }
 
 function start_game() {
-    start_timer();
     get_bot_choice();
 }
 
