@@ -57,7 +57,7 @@ header {
 }
 
 .result > p {
-    font-size: 40px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -101,6 +101,13 @@ header {
     margin-right: 10px;
 }
 
+.choice-you > p {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #A5E380;
+}
+
 .choice-you:hover {
     cursor: pointer;
 }
@@ -116,6 +123,13 @@ header {
 .choice-bot > img {
     height: 50%;
     width: 50%;
+}
+
+.choice-bot > p {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #4C67DD;
 }
 
 header > .author {
