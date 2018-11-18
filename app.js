@@ -1,7 +1,5 @@
 // Caching the DOM for performance enhancement
 
-const winner = "bot";
-
 const userScore = 0;
 const botScore = 0;
 
@@ -28,12 +26,17 @@ let bot_choices = Array(rock_bot_div, paper_bot_div, scissors_bot_div);
 let active_user_choice = get_random_choice(user_choices);
 let active_bot_choice = get_random_choice(bot_choices);
 
+
+
 // Displaying a random user and bot choice on page load
 display_choice(active_user_choice);
 display_choice(active_bot_choice);
 
-console.log(`User choice on page load : ${active_user_choice.getAttribute(['data-move'])}`);
-console.log(`Bot choice on page load : ${active_bot_choice.getAttribute(['data-move'])}`);
+let user_move = active_user_choice.getAttribute(['data-move']);
+let bot_move = active_bot_choice.getAttribute(['data-move']);
+
+console.log(`Your default move on page load : ${user_move}`);
+console.log(`Bot's default move on page load : ${bot_move}`);
 
 // Event listener for user click to select a move from Rock/Paper/Scissors
 rock_you_div.addEventListener("click", function () {
@@ -69,18 +72,20 @@ function get_random_choice(choices) {
 
 function get_bot_choice() {
     let count = 0;
-    // Setting timer of 5 secs with intervals of 100
-        let random_bot_move = setInterval(function () {
-            hide_choice(active_bot_choice);
-            active_bot_choice = get_random_choice(bot_choices);
-            display_choice(active_bot_choice);
-            console.log(count);
-            count++;
-            if (count === 50) {
-                update_result();
-                clearInterval(random_bot_move);
-            }
-        }, 100);
+    // Setting timer of 5 secs with intervals of 100ms
+    let random_bot_move = setInterval(function () {
+        hide_choice(active_bot_choice);
+        active_bot_choice = get_random_choice(bot_choices);
+        display_choice(active_bot_choice);
+        console.log(count);
+
+        if (count === 50) {
+            evaluate_game();
+            clearInterval(random_bot_move);
+        }
+
+        count++;
+    }, 100);
 }
 
 function start_timer() {
@@ -89,30 +94,60 @@ function start_timer() {
 
 function reset_game_state() {
 
-}
-
-function find_winner() {
-    // switch(active_user_choice.id){
-    //     case rock_you
-    // }
+//    Reset result text
+//    Reset switch to start the game state
 
 }
 
-function update_result() {
-    if (winner.valueOf() === "user") {
-        result_div.textContent = `${active_user_choice.getAttribute(['data-move'])} beats ${active_bot_choice.getAttribute(['data-move'])}`;
-        console.log(result_div.textContent);
+function evaluate_game() {
+
+    user_move = active_user_choice.getAttribute(['data-move']);
+    bot_move = active_bot_choice.getAttribute(['data-move']);
+
+    let winner = "Its a Tie. Play Again.";
+
+    if (user_move !== bot_move) {
+        switch (user_move) {
+            case "Rock":
+                if (bot_move === "Paper") {
+                    winner = "Bot";
+                }
+                else winner= "You";
+                break;
+
+            case "Paper":
+                if (bot_move === "Scissors") {
+                    winner = "Bot";
+                }
+                else winner= "You";
+                break;
+
+            case "Scissors":
+                if (bot_move === "Rock") {
+                    winner = "Bot";
+                }
+                else winner= "You";
+                break;
+        }
     }
-    else {
-        result_div.textContent = `${active_bot_choice.getAttribute(['data-move'])} beats ${active_user_choice.getAttribute(['data-move'])}`;
-        console.log(result_div.textContent);
+    update_result(winner);
+}
+
+function update_result(winner) {
+    if (winner.valueOf() === "You") {
+        result_div.textContent = `${user_move} beats ${bot_move}, ${winner} Win!`;
     }
+    else if (winner.valueOf() === "Bot") {
+        result_div.textContent = `${bot_move} beats ${user_move}, ${winner} Wins!`;
+    }
+
+    else result_div.textContent = winner;
+
+    // calculate_score();
 }
 
 function start_game() {
     start_timer();
     get_bot_choice();
-    // find_winner();
-    // calculate_score();
 }
 
