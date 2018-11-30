@@ -73,12 +73,14 @@ function get_random_choice(choices) {
 }
 
 async function start_game() {
-    play_button.disabled= true;
+    play_button.disabled = true;
     play_button.textContent = "Bot is 🤔";
     play_button.style.background = "#666";
     get_bot_choice()
         .then(evaluate_game)
-        .then(reset_play_button);
+        .then(reset_play_button)
+        .then(update_score);
+
 }
 
 let get_bot_choice = function () {
@@ -107,29 +109,32 @@ let evaluate_game = function (completion_message) {
         user_move = active_user_choice.getAttribute(['data-move']);
         bot_move = active_bot_choice.getAttribute(['data-move']);
 
-        if (user_move !== bot_move) {
-            switch (user_move) {
+        if (user_move.valueOf() !== bot_move.valueOf()) {
+            switch (user_move.valueOf()) {
                 case "Rock":
-                    if (bot_move === "Paper") {
+                    if (bot_move.valueOf() === "Paper") {
                         winner = "Bot";
                     }
                     else winner = "You";
                     break;
 
                 case "Paper":
-                    if (bot_move === "Scissors") {
+                    if (bot_move.valueOf() === "Scissors") {
                         winner = "Bot";
                     }
                     else winner = "You";
                     break;
 
                 case "Scissors":
-                    if (bot_move === "Rock") {
+                    if (bot_move.valueOf() === "Rock") {
                         winner = "Bot";
                     }
                     else winner = "You";
                     break;
             }
+        }
+        else {
+            winner = "Its a Tie. Play Again.";
         }
         play_button.textContent = "updating score";
         play_button.style.background = "#666";
@@ -140,20 +145,35 @@ let evaluate_game = function (completion_message) {
     });
 };
 
+
 let reset_play_button = function (completion_message) {
     //    Reset result text
     //    Reset switch to start the game state
     return new Promise(function (resolve) {
         setTimeout(function () {
-            if (winner !== "Its a Tie. Play Again." ){
+            if (winner !== "Its a Tie. Play Again.") {
                 result_div.textContent = "Score updated, play Again ?";
             }
             console.log(winner);
-            play_button.disabled= false;
+            play_button.disabled = false;
             play_button.textContent = "Click to Play";
             play_button.style.background = "#67BDB9";
-            resolve({result: completion_message.status2});
+            resolve({status3: completion_message.status2});
         }, 3000);
+    });
+};
+
+let update_score = function (completion_message) {
+    return new Promise(function (resolve) {
+        if (winner.valueOf() === "You") {
+            userScore++;
+            userScore_span.textContent = userScore;
+        }
+        else if (winner.valueOf() === "Bot") {
+            botScore++;
+            botScore_span.textContent = botScore;
+        }
+        resolve({result: completion_message.status3});
     });
 };
 
