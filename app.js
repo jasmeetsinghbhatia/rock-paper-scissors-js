@@ -17,6 +17,8 @@ const rock_bot_div = document.getElementById("rock-bot");
 const paper_bot_div = document.getElementById("paper-bot");
 const scissors_bot_div = document.getElementById("scissors-bot");
 
+const play_button = document.getElementsByClassName("onoffswitch-checkbox");
+
 // Done with DOM caching
 
 // Load the homepage with a random state of the game for user and the bot
@@ -25,7 +27,6 @@ let bot_choices = Array(rock_bot_div, paper_bot_div, scissors_bot_div);
 
 let active_user_choice = get_random_choice(user_choices);
 let active_bot_choice = get_random_choice(bot_choices);
-
 
 
 // Displaying a random user and bot choice on page load
@@ -70,29 +71,89 @@ function get_random_choice(choices) {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function get_bot_choice() {
-    start_timer();
-    let count = 1;
-    // Setting timer of 5 secs with intervals of 100ms
-    let random_bot_move = setInterval(function () {
-        hide_choice(active_bot_choice);
-        active_bot_choice = get_random_choice(bot_choices);
-        display_choice(active_bot_choice);
-        console.log(count);
-
-        if (count === 10) {
-            clearInterval(random_bot_move);
-            evaluate_game();
-        }
-
-        count++;
-    }, 500);
+async function start_game() {
+    get_bot_choice()
+        .then(evaluate_game)
+        .then(reset_play_button);
 }
+
+let get_bot_choice = function () {
+    return new Promise(function (resolve) {
+        start_timer();
+        let count = 1;
+        // Setting timer of 5 secs with intervals of 100ms
+        let random_bot_move = setInterval(function () {
+            hide_choice(active_bot_choice);
+            active_bot_choice = get_random_choice(bot_choices);
+            display_choice(active_bot_choice);
+            console.log(count);
+
+            if (count === 10) {
+                clearInterval(random_bot_move);
+                console.log('Random Bot Move Completed');
+                resolve({status1: 'function run completed'});
+            }
+            count++;
+        }, 500);
+    });
+};
+
+let evaluate_game = function (completion_message) {
+    return new Promise(function (resolve) {
+        user_move = active_user_choice.getAttribute(['data-move']);
+        bot_move = active_bot_choice.getAttribute(['data-move']);
+
+        let winner = "Its a Tie. Play Again.";
+
+        if (user_move !== bot_move) {
+            switch (user_move) {
+                case "Rock":
+                    if (bot_move === "Paper") {
+                        winner = "Bot";
+                    }
+                    else winner = "You";
+                    break;
+
+                case "Paper":
+                    if (bot_move === "Scissors") {
+                        winner = "Bot";
+                    }
+                    else winner = "You";
+                    break;
+
+                case "Scissors":
+                    if (bot_move === "Rock") {
+                        winner = "Bot";
+                    }
+                    else winner = "You";
+                    break;
+            }
+        }
+        update_result(winner);
+        console.log('Evaluation for the game is completed');
+        resolve({status2: completion_message.status1});
+
+    });
+};
+
+let reset_play_button = function (completion_message) {
+    //    Reset result text
+//    Reset switch to start the game state
+    let promise = new Promise(function (resolve) {
+        setTimeout(function () {
+            result_div.textContent = "Score updated, play Again ?";
+            $('input[type="checkbox"]:checked').prop('checked',false);
+            console.log('third method completed');
+            resolve({result: completion_message.status2});
+        }, 3000);
+    });
+    return promise;
+};
 
 function start_timer() {
 // start the visible timer and sync with get_bot_choice()
     let count = 4;
-    result_div.textContent = `${count+1} seconds remaining`;
+    result_div.textContent = `${count + 1} seconds remaining`;
 
     let timer = setInterval(function () {
         result_div.textContent = `${count} seconds remaining`;
@@ -104,47 +165,6 @@ function start_timer() {
 
 }
 
-function reset_game_state() {
-
-//    Reset result text
-//    Reset switch to start the game state
-
-}
-
-function evaluate_game() {
-
-    user_move = active_user_choice.getAttribute(['data-move']);
-    bot_move = active_bot_choice.getAttribute(['data-move']);
-
-    let winner = "Its a Tie. Play Again.";
-
-    if (user_move !== bot_move) {
-        switch (user_move) {
-            case "Rock":
-                if (bot_move === "Paper") {
-                    winner = "Bot";
-                }
-                else winner= "You";
-                break;
-
-            case "Paper":
-                if (bot_move === "Scissors") {
-                    winner = "Bot";
-                }
-                else winner= "You";
-                break;
-
-            case "Scissors":
-                if (bot_move === "Rock") {
-                    winner = "Bot";
-                }
-                else winner= "You";
-                break;
-        }
-    }
-    update_result(winner);
-}
-
 function update_result(winner) {
     if (winner.valueOf() === "You") {
         result_div.textContent = `${user_move} beats ${bot_move}, ${winner} Win!`;
@@ -154,11 +174,4 @@ function update_result(winner) {
     }
 
     else result_div.textContent = winner;
-
-    // calculate_score();
 }
-
-function start_game() {
-    get_bot_choice();
-}
-
