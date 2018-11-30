@@ -23,34 +23,34 @@
     <p id="result-text">Click the button to start</p>
 </div>
 
-
-<div class="onoffswitch" onclick="start_game();" aria-label="Thank you!">
-    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-    <label class="onoffswitch-label" for="myonoffswitch">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-    </label>
+<div class="play">
+    <button class="button" onclick="start_game();" id="play-btn">Click to Play</button>
 </div>
-
 
 <div class="choices">
     <div class="choice-you" id="rock-you" style="display: none" data-move='Rock'>
-        <img src="images/rock-you.png" alt="Rock"><p>Rock</p>
+        <img src="images/rock-you.png" alt="Rock">
+        <p>Rock</p>
     </div>
     <div class="choice-you" id="paper-you" style="display: none" data-move='Paper'>
-        <img src="images/paper-you.png" alt="Paper"><p>Paper</p>
+        <img src="images/paper-you.png" alt="Paper">
+        <p>Paper</p>
     </div>
     <div class="choice-you" id="scissors-you" style="display: none" data-move="Scissors">
-        <img src="images/scissors-you.png" alt="Scissors"><p>Scissors</p>
+        <img src="images/scissors-you.png" alt="Scissors">
+        <p>Scissors</p>
     </div>
     <div class="choice-bot" id="rock-bot" style="display: none" data-move="Rock">
-        <img src="images/rock-bot.png" alt="Rock"><p>Rock</p>
+        <img src="images/rock-bot.png" alt="Rock">
+        <p>Rock</p>
     </div>
     <div class="choice-bot" id="paper-bot" style="display: none" data-move="Paper">
-        <img src="images/paper-bot.png" alt="Paper"><p>Paper</p>
+        <img src="images/paper-bot.png" alt="Paper">
+        <p>Paper</p>
     </div>
     <div class="choice-bot" id="scissors-bot" style="display: none" data-move="Scissors">
-        <img src="images/scissors-bot.png" alt="Scissors"><p>Scissors</p>
+        <img src="images/scissors-bot.png" alt="Scissors">
+        <p>Scissors</p>
     </div>
 </div>
 <script src="app.js" charset="utf-8">

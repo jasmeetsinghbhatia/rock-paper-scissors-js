@@ -143,50 +143,38 @@ header > .author {
     font-weight: bold;
 }
 
-.onoffswitch {
-    position: relative; width: 160px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-    margin: 20px auto;
-}
-.onoffswitch-checkbox {
-    display: none;
-}
-.onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 50px;
-}
-.onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 37px; padding: 0; line-height: 37px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    box-sizing: border-box;
-}
-.onoffswitch-inner:before {
-    content: "Make your move";
-    padding-left: 10px;
-    background-color: #63BDBA; color: #FFFFFF;
-}
-.onoffswitch-inner:after {
-    content: "Click to start";
-    padding-right: 10px;
-    background-color: #E2584D; color: #FFFFFF;
-    text-align: right;
-}
-.onoffswitch-switch {
-    display: block; width: 20px; margin: 10px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
-    right: 119px;
-    border: 2px solid #999999; border-radius: 50%;
-    transition: all 0.3s ease-in 0s;
+.play {
+    position: relative;
+    width: 140px;
+    height: 50px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    margin: 10px auto 0 auto;
 }
 
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
+.button {
+    padding: 10px 10px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    background-color: #67BDB9;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 4px white;
+    width: 140px;
+    height: 50px;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px;
+
+.button:hover {
+    background-color: #F5BC55;
+    color: white;
+}
+
+.button:active {
+    background-color: #67BDB9;
+    box-shadow: 0 1px #666;
+    transform: translateY(1px);
 }

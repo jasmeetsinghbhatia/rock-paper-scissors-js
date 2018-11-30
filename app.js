@@ -1,7 +1,8 @@
 // Caching the DOM for performance enhancement
 
-const userScore = 0;
-const botScore = 0;
+let userScore = 0;
+let botScore = 0;
+let winner = "Its a Tie. Play Again.";
 
 const userScore_span = document.getElementById("user-score");
 const botScore_span = document.getElementById("bot-score");
@@ -17,7 +18,7 @@ const rock_bot_div = document.getElementById("rock-bot");
 const paper_bot_div = document.getElementById("paper-bot");
 const scissors_bot_div = document.getElementById("scissors-bot");
 
-const play_button = document.getElementsByClassName("onoffswitch-checkbox");
+const play_button = document.getElementById("play-btn");
 
 // Done with DOM caching
 
@@ -72,6 +73,9 @@ function get_random_choice(choices) {
 }
 
 async function start_game() {
+    play_button.disabled= true;
+    play_button.textContent = "Bot is 🤔";
+    play_button.style.background = "#666";
     get_bot_choice()
         .then(evaluate_game)
         .then(reset_play_button);
@@ -103,8 +107,6 @@ let evaluate_game = function (completion_message) {
         user_move = active_user_choice.getAttribute(['data-move']);
         bot_move = active_bot_choice.getAttribute(['data-move']);
 
-        let winner = "Its a Tie. Play Again.";
-
         if (user_move !== bot_move) {
             switch (user_move) {
                 case "Rock":
@@ -129,6 +131,8 @@ let evaluate_game = function (completion_message) {
                     break;
             }
         }
+        play_button.textContent = "updating score";
+        play_button.style.background = "#666";
         update_result(winner);
         console.log('Evaluation for the game is completed');
         resolve({status2: completion_message.status1});
@@ -138,16 +142,19 @@ let evaluate_game = function (completion_message) {
 
 let reset_play_button = function (completion_message) {
     //    Reset result text
-//    Reset switch to start the game state
-    let promise = new Promise(function (resolve) {
+    //    Reset switch to start the game state
+    return new Promise(function (resolve) {
         setTimeout(function () {
-            result_div.textContent = "Score updated, play Again ?";
-            $('input[type="checkbox"]:checked').prop('checked',false);
-            console.log('third method completed');
+            if (winner !== "Its a Tie. Play Again." ){
+                result_div.textContent = "Score updated, play Again ?";
+            }
+            console.log(winner);
+            play_button.disabled= false;
+            play_button.textContent = "Click to Play";
+            play_button.style.background = "#67BDB9";
             resolve({result: completion_message.status2});
         }, 3000);
     });
-    return promise;
 };
 
 function start_timer() {
