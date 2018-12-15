@@ -4,4 +4,8 @@ This is a rock paper scissors game made in vanilla JS, HTML and CSS over a weeke
 To play the game visit : 
 [Rock Paper Scissors](https://jasmeetsinghbhatia.github.io/rps-in-a-weekend/)
 
-<img width="797" alt="screen shot 2018-11-11 at 8 38 39 pm" src="https://user-images.githubusercontent.com/5153163/48321689-e106d300-e5f1-11e8-958d-a36b57361301.png">
+# Make your move while the Bot is thinking
+<img width="929" alt="screen shot 2018-12-15 at 2 44 04 pm" src="https://user-images.githubusercontent.com/5153163/50046853-66a9f280-0078-11e9-9879-7d1f5ef2142c.png">
+
+# Score updated in real time
+<img width="870" alt="screen shot 2018-12-15 at 2 45 54 pm" src="https://user-images.githubusercontent.com/5153163/50046864-83dec100-0078-11e9-9c37-fb10aa72d552.png">
