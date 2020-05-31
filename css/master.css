@@ -132,15 +132,36 @@ header {
     color: #4C67DD;
 }
 
-header > .author {
-    position: sticky;
-    padding: 0px;
-    text-align: center;
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 10px;
     background: white;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: fit-content;
     font-family: Asap, sans-serif;
     font-weight: bold;
+}
+
+.author {
+    text-align: right;  
+    float: left;
+    width: 58%;
+}
+
+.fork {
+    text-align: right;
+    background: none;
+    width: 20%;
+    float: right;
+
+}
+
+.github-octocat {
+   width: 10%;
+   height: 10%;
 }
 
 .play {
